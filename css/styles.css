@@ -389,3 +389,76 @@ nav {
   margin-top: 8px;
   text-align: center;
 }
+
+/* ── ABOUT ── */
+.about-section {
+  margin-bottom: 32px;
+}
+
+.about-section h2 {
+  font-size: 11px;
+  color: #ff00cc;
+  margin-bottom: 16px;
+}
+
+.chapter {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 0, 204, 0.15);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 12px;
+}
+
+.chapter-icon {
+  font-size: 24px;
+}
+
+.chapter h3 {
+  font-size: 8px;
+  color: #ff00cc;
+  margin-bottom: 8px;
+}
+
+.chapter p {
+  font-size: 7px;
+  color: #8899aa;
+  line-height: 2;
+}
+
+.ship-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.ship-stat {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 200, 200, 0.15);
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.ship-stat .label {
+  font-size: 6px;
+  color: #8899aa;
+  margin-bottom: 6px;
+}
+
+.ship-stat .value {
+  font-size: 9px;
+  color: #00ffff;
+}
+
+/* ── FOOTER ── */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px;
+  font-size: 6px;
+  color: #334455;
+  border-top: 1px solid rgba(0, 200, 200, 0.1);
+}
