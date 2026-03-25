@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cosmic Codex – Game</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+    body { display:flex; flex-direction:column; height:100vh; overflow:hidden; }
+    #game-wrap { flex:1; display:flex; overflow:hidden; position:relative; }
+    #inventory  { display:none; }
+    #controls-hint { display:none; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+    @keyframes play-glow { 0%,100%{box-shadow:0 0 20px #ffee00,0 0 40px rgba(255,220,0,0.5)} 50%{box-shadow:0 0 30px #ffee00,0 0 60px rgba(255,200,0,0.8)} }
+    .full-screen { position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px; }
+    .hidden { display:none !important; }
+  </style>
+  </head>
+  <body>
+    <div class="nebula-bg"></div>
+    <div id="star-field"></div>
+
+    <!-- HUD -->
+    <div class="hud">
+      <div class="hud-left">
+        <span id="hud-user" class="hud-user"></span>
+        <span id="hud-room" class="hud-room">⚙️ ENGINEERING BAY</span>
+      </div>
+      <div class="hud-right">
+        <span id="hud-score" class="hud-score">0 PTS</span>
+        <span id="hud-timer" class="hud-timer">60</span>
+        <a href="index.html"
+          style="font-size:7px;color:#8899aa;text-decoration:none;padding:6px 10px;border:1px solid rgba(136,153,170,0.3);border-radius:4px">EXIT</a>
+      </div>
+    </div>
+
+    <!-- GAME AREA -->
+    <div id="game-wrap">
+      <canvas id="game-canvas"></canvas>
+
+      <!-- Inventory -->
+      <div id="inventory">
+        <div class="inv-title">ITEMS</div>
+        <div id="inv-slots"></div>
+      </div>
+
+      <!-- IDLE SCREEN -->
+
+      <div id="idle-screen" class="full-screen"
+        style="background:rgba(0,0,0,0.92);z-index:10">
+        <div
+          style="font-size:64px;margin-bottom:20px;animation:float 3s ease-in-out infinite">🚀</div>
+        <h2
+          style="font-family:'Press Start 2P',monospace,sans-serif;font-size:clamp(12px,4vw,20px);color:#00ffff;text-shadow:0 0 15px #00ffff;margin-bottom:12px">MISSION:
+          ESCAPE</h2>
+        <p
+          style="font-family:'Press Start 2P',monospace,sans-serif;font-size:clamp(7px,2vw,9px);color:#aaccdd;text-align:center;max-width:380px;line-height:2;margin-bottom:28px">
+          The Andromeda-class ship has been corrupted.<br>
+          Solve 4 puzzles before reactor meltdown.
+        </p>
+        <button onclick="startGame()" style="
+          font-family:'Press Start 2P',monospace,sans-serif;
+          font-size:13px;color:#111;
+          background:repeating-linear-gradient(45deg,#f5e000 0,#f5e000 12px,#111 12px,#111 24px);
+          border:3px solid #ffee00;border-radius:6px;
+          padding:16px 40px;cursor:pointer;
+          box-shadow:0 0 25px #ffee00;
+          animation:play-glow 2s ease-in-out infinite">▶ BEGIN MISSION</button>
+      </div>
+
+      <!-- GAME OVER -->
+      <div id="gameover-screen" class="full-screen hidden"
+        style="background:rgba(0,0,0,0.9)">
+        <div style="font-size:48px;margin-bottom:12px">💥</div>
+        <div class="screen-title"
+          style="color:#ff4400;text-shadow:0 0 20px #ff4400;animation:blink 1s infinite">REACTOR
+          MELTDOWN!</div>
+        <div class="screen-sub">MISSION FAILED</div>
+        <div class="stat-box">
+          <div class="stat-row"><span>SCORE</span><span class="stat-val"
+              id="go-score">0</span></div>
+          <div class="stat-row"><span>ROOMS CLEARED</span><span class="stat-val"
+              id="go-rooms">0/4</span></div>
+          <div class="stat-row"><span>WRONG ATTEMPTS</span><span
+              class="stat-val" id="go-wrong">0</span></div>
+        </div>
+        <div
+          style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <button onclick="startGame()" class="btn-play"
+            style="font-size:10px;padding:12px 28px">▶ TRY AGAIN</button>
+          <a href="score.html" class="btn-cyan">VIEW SCORES</a>
+        </div>
+      </div>
+
+      <!-- VICTORY -->
+      <div id="victory-screen" class="full-screen hidden"
+        style="background:rgba(0,0,0,0.9)">
+        <div style="font-size:48px;margin-bottom:12px">🎉</div>
+        <div class="screen-title"
+          style="color:#00ff88;text-shadow:0 0 20px #00ff88">ESCAPED!</div>
+        <div class="screen-sub">MISSION COMPLETE</div>
+        <div class="stat-box">
+          <div class="stat-row"><span>FINAL SCORE</span><span class="stat-val"
+              id="vic-score">0</span></div>
+          <div class="stat-row"><span>ROOMS CLEARED</span><span class="stat-val"
+              id="vic-rooms">0/4</span></div>
+          <div class="stat-row"><span>TIME</span><span class="stat-val"
+              id="vic-time">0s</span></div>
+          <div class="stat-row"><span>WRONG ATTEMPTS</span><span
+              class="stat-val" id="vic-wrong">0</span></div>
+        </div>
+        <div
+          style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+          <button onclick="startGame()" class="btn-play"
+            style="font-size:10px;padding:12px 28px">▶ PLAY AGAIN</button>
+          <a href="score.html" class="btn-cyan">LEADERBOARD</a>
+        </div>
+      </div>
+
+      <!-- TRANSITION -->
+      <div id="transition-screen" class="full-screen hidden"
+        style="background:#000">
+        <div
+          style="font-size:9px;color:#00ffcc;margin-bottom:8px;letter-spacing:4px">ENTERING</div>
+        <div class="screen-title" style="color:#00ffff"></div>
+        <div
+          style="width:200px;height:4px;background:rgba(0,200,200,0.2);border-radius:2px;margin-top:20px;overflow:hidden">
+          <div
+            style="height:100%;background:#00ffcc;animation:scan-line 2.5s linear forwards;width:0"></div>
+        </div>
+        <style>@keyframes scan-line{to{width:100%}}</style>
+      </div>
+
+      <!-- PUZZLE OVERLAY -->
+      <div id="puzzle-overlay" class="hidden"
+        style="position:absolute;inset:0;z-index:50;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center">
+        <div class="puzzle-box">
+          <button class="puzzle-close" onclick="closePuzzle()">✕</button>
+          <div id="puzzle-content"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTROLS HINT -->
+    <div id="controls-hint">
+      <span>WASD / ARROWS — MOVE</span>
+      <span>E — INTERACT</span>
+      <span>ESC — CLOSE PUZZLE</span>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script src="js/game.js"></script>
+  </body>
+</html>
