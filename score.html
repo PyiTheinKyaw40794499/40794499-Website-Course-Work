@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cosmic Codex – Scores</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body>
+  <div class="nebula-bg"></div>
+  <div class="nebula-blob-left"></div>
+  <div class="nebula-blob-right"></div>
+  <div id="star-field"></div>
+
+  <nav>
+    <a href="index.html" class="nav-logo">🚀 COSMIC CODEX</a>
+    <div class="nav-links">
+      <a href="index.html">HOME</a>
+      <a href="about.html">ABOUT</a>
+      <a href="game.html">GAME</a>
+      <a href="score.html" class="active">SCORES</a>
+      <span id="nav-user-info" style="font-size:7px;color:#aaccdd;display:none"></span>
+      <button id="open-auth" class="nav-auth-btn">LOGIN / REGISTER</button>
+      <button id="nav-logout" class="nav-auth-btn" style="display:none;border-color:#ff00cc;color:#ff00cc">LOGOUT</button>
+    </div>
+  </nav>
+
+  <div class="page-content">
+    <div class="hero" style="padding:40px 0 24px">
+      <h1 style="font-size:clamp(13px,3vw,18px)">🏆 SCORES</h1>
+    </div>
+
+    <div class="score-section">
+      <h2>🌌 GLOBAL TOP 10</h2>
+      <div id="leaderboard"></div>
+    </div>
+
+    <div class="score-section">
+      <h2>👤 YOUR MISSIONS</h2>
+      <div id="personal-section"></div>
+    </div>
+  </div>
+
+  <footer>© 2026 COSMIC CODEX · ALL RIGHTS RESERVED</footer>
+
+  <!-- AUTH MODAL -->
+  <div id="auth-modal" class="modal-overlay hidden">
+    <div class="modal-box">
+      <button id="modal-close" class="modal-close">✕</button>
+      <h2>🚀 COSMIC CODEX</h2>
+      <p>Login or create a new account</p>
+      <div class="modal-tabs">
+        <button class="modal-tab active" data-tab="login">LOGIN</button>
+        <button class="modal-tab" data-tab="register">REGISTER</button>
+      </div>
+      <form id="login-form">
+        <div class="form-group"><label>EMAIL</label><input type="email" id="login-email" placeholder="pilot@space.com" required/></div>
+        <div class="form-group"><label>PASSWORD</label><input type="password" id="login-pass" placeholder="••••••••" required/></div>
+        <div id="login-error" class="form-error"></div>
+        <button type="submit" class="form-submit">LOGIN →</button>
+      </form>
+      <form id="register-form" style="display:none">
+        <div class="form-group"><label>USERNAME</label><input type="text" id="reg-username" placeholder="StarPilot42" required/></div>
+        <div class="form-group"><label>EMAIL</label><input type="email" id="reg-email" placeholder="pilot@space.com" required/></div>
+        <div class="form-group"><label>PASSWORD</label><input type="password" id="reg-pass" placeholder="••••••••" required/></div>
+        <div class="form-group"><label>CONFIRM PASSWORD</label><input type="password" id="reg-pass2" placeholder="••••••••" required/></div>
+        <div id="register-error" class="form-error"></div>
+        <div id="register-ok" class="form-success"></div>
+        <button type="submit" class="form-submit">CREATE ACCOUNT →</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+  <script src="js/score.js"></script>
+</body>
+</html>
