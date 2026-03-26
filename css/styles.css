@@ -452,6 +452,232 @@ nav {
   color: #00ffff;
 }
 
+/* ── Game Pages ── */
+/* ── HUD ── */
+.hud {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background: rgba(0, 0, 10, 0.9);
+  border-bottom: 2px solid rgba(0, 200, 200, 0.3);
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.hud-left,
+.hud-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.hud-room {
+  font-size: 9px;
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff;
+}
+
+.hud-score {
+  font-size: 9px;
+  color: #ffcc00;
+}
+
+.hud-timer {
+  font-size: 13px;
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88;
+  min-width: 48px;
+  text-align: center;
+}
+
+.hud-timer.warning {
+  color: #ffaa00;
+  text-shadow: 0 0 8px #ffaa00;
+  animation: blink 1s infinite;
+}
+
+.hud-timer.critical {
+  color: #ff4400;
+  text-shadow: 0 0 10px #ff4400;
+  animation: blink 0.5s infinite;
+}
+
+.hud-user {
+  font-size: 7px;
+  color: #8899aa;
+}
+
+/* ── GAME CANVAS AREA ── */
+#game-wrap {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+#game-canvas {
+  display: block;
+  outline: none;
+}
+
+/* ── INVENTORY ── */
+#inventory {
+  width: 100px;
+  background: rgba(0, 0, 10, 0.9);
+  border-left: 2px solid rgba(0, 200, 200, 0.3);
+  padding: 12px 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  overflow-y: auto;
+}
+
+.inv-title {
+  font-size: 6px;
+  color: #8899aa;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.inv-slot {
+  width: 76px;
+  height: 76px;
+  background: rgba(0, 200, 200, 0.06);
+  border: 1px solid rgba(0, 200, 200, 0.2);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  position: relative;
+}
+
+.inv-slot:hover {
+  border-color: #00ffff;
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+.inv-slot .item-name {
+  position: absolute;
+  bottom: 2px;
+  left: 0;
+  right: 0;
+  font-size: 5px;
+  color: #aaccdd;
+  text-align: center;
+}
+
+/* ── PUZZLE MODAL ── */
+#puzzle-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+#puzzle-overlay.hidden {
+  display: none;
+}
+
+.puzzle-box {
+  background: #080118;
+  border: 2px solid rgba(0, 200, 200, 0.4);
+  border-radius: 12px;
+  padding: 32px;
+  width: 90%;
+  max-width: 460px;
+  position: relative;
+}
+
+.puzzle-title {
+  font-size: 11px;
+  color: #00ffff;
+  margin-bottom: 8px;
+}
+
+.puzzle-desc {
+  font-size: 7px;
+  color: #8899aa;
+  line-height: 2;
+  margin-bottom: 20px;
+}
+
+.puzzle-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: transparent;
+  border: none;
+  color: #8899aa;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ── OVERLAY SCREENS ── */
+.full-screen {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+}
+
+.full-screen.hidden {
+  display: none;
+}
+
+.screen-title {
+  font-size: clamp(14px, 4vw, 22px);
+  margin-bottom: 12px;
+}
+
+.screen-sub {
+  font-size: clamp(7px, 2vw, 9px);
+  color: #aaccdd;
+  margin-bottom: 24px;
+  line-height: 2;
+}
+
+.stat-box {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(0, 200, 200, 0.3);
+  border-radius: 8px;
+  padding: 20px 28px;
+  margin-bottom: 24px;
+  text-align: left;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+  font-size: 8px;
+  color: #aaccdd;
+  margin-bottom: 10px;
+}
+
+.stat-row:last-child {
+  margin-bottom: 0;
+}
+
+.stat-val {
+  color: #00ffff;
+}
+
 /* ── FOOTER ── */
 footer {
   position: relative;
