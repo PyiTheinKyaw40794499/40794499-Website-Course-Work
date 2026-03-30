@@ -678,6 +678,78 @@ nav {
   color: #00ffff;
 }
 
+/* ── SCORE PAGE ── */
+.score-section {
+  margin-bottom: 40px;
+}
+
+.score-section h2 {
+  font-size: 11px;
+  color: #00ffff;
+  margin-bottom: 20px;
+}
+
+.leaderboard-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 200, 200, 0.15);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin-bottom: 10px;
+  font-size: 8px;
+}
+
+.rank {
+  font-size: 10px;
+  min-width: 32px;
+}
+
+.rank.gold {
+  color: #ffd700;
+  text-shadow: 0 0 8px #ffd700;
+}
+
+.rank.silver {
+  color: #c0c0c0;
+}
+
+.rank.bronze {
+  color: #cd7f32;
+}
+
+.rank.other {
+  color: #8899aa;
+}
+
+.lb-name {
+  flex: 1;
+  color: #aaccdd;
+}
+
+.lb-score {
+  color: #ffcc00;
+}
+
+.lb-tag {
+  font-size: 6px;
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+
+.lb-tag.win {
+  background: rgba(0, 255, 100, 0.15);
+  color: #00ff88;
+  border: 1px solid #00ff88;
+}
+
+.lb-tag.loss {
+  background: rgba(255, 50, 50, 0.1);
+  color: #ff6666;
+  border: 1px solid #ff4444;
+}
+
 /* ── FOOTER ── */
 footer {
   position: relative;
