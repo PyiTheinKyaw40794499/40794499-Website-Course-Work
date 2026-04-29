@@ -6,7 +6,18 @@
     <title>Cosmic Codex – Game</title>
     <link rel="stylesheet" href="css/styles.css" />
     <style>
-    body { display:flex; flex-direction:column; height:100vh; overflow:hidden; }
+    body {
+      background: #080118;
+      color: #fff;
+      font-family: 'Press Start 2P', monospace;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #0a0020; }
+    ::-webkit-scrollbar-thumb { background: #00cccc; border-radius: 3px; }
     #game-wrap { flex:1; display:flex; overflow:hidden; position:relative; }
     #inventory  { display:none; }
     #controls-hint { display:none; }
@@ -44,10 +55,22 @@
         <div id="inv-slots"></div>
       </div>
 
+      <!-- ITEM DETAIL POPUP -->
+      <div id="item-popup">
+        <button class="item-popup-close" onclick="closeItemPopup()">✕</button>
+        <div id="item-popup-icon"></div>
+        <div id="item-popup-name"></div>
+        <div id="item-popup-rarity"></div>
+        <div class="item-popup-divider"></div>
+        <div id="item-popup-desc"></div>
+        <div class="item-popup-use-label">USE IN:</div>
+        <div id="item-popup-use"></div>
+        <div class="item-popup-one-use">ONE-TIME USE ITEM</div>
+      </div>
+
       <!-- IDLE SCREEN -->
 
-      <div id="idle-screen" class="full-screen"
-        style="background:rgba(0,0,0,0.92);z-index:10">
+      <div id="idle-screen" class="full-screen">
         <div
           style="font-size:64px;margin-bottom:20px;animation:float 3s ease-in-out infinite">🚀</div>
         <h2
@@ -60,7 +83,7 @@
         </p>
         <button onclick="startGame()" style="
           font-family:'Press Start 2P',monospace,sans-serif;
-          font-size:13px;color:#111;
+          font-size:13px;color:#ff0000;
           background:repeating-linear-gradient(45deg,#f5e000 0,#f5e000 12px,#111 12px,#111 24px);
           border:3px solid #ffee00;border-radius:6px;
           padding:16px 40px;cursor:pointer;

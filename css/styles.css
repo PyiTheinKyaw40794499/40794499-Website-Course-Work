@@ -166,7 +166,7 @@ nav {
 .btn-play {
   font-family: 'Press Start 2P', monospace;
   font-size: clamp(10px, 3vw, 13px);
-  color: #111;
+  color: #ff0000;
   background: repeating-linear-gradient(45deg, #f5e000 0, #f5e000 12px, #111 12px, #111 24px);
   border: 3px solid #ffee00;
   border-radius: 6px;
@@ -390,68 +390,6 @@ nav {
   text-align: center;
 }
 
-/* ── ABOUT ── */
-.about-section {
-  margin-bottom: 32px;
-}
-
-.about-section h2 {
-  font-size: 11px;
-  color: #ff00cc;
-  margin-bottom: 16px;
-}
-
-.chapter {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(255, 0, 204, 0.15);
-  border-radius: 8px;
-  padding: 18px;
-  margin-bottom: 12px;
-}
-
-.chapter-icon {
-  font-size: 24px;
-}
-
-.chapter h3 {
-  font-size: 8px;
-  color: #ff00cc;
-  margin-bottom: 8px;
-}
-
-.chapter p {
-  font-size: 7px;
-  color: #8899aa;
-  line-height: 2;
-}
-
-.ship-stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-}
-
-.ship-stat {
-  background: rgba(0, 0, 0, 0.4);
-  border: 1px solid rgba(0, 200, 200, 0.15);
-  border-radius: 6px;
-  padding: 14px;
-}
-
-.ship-stat .label {
-  font-size: 6px;
-  color: #8899aa;
-  margin-bottom: 6px;
-}
-
-.ship-stat .value {
-  font-size: 9px;
-  color: #00ffff;
-}
-
 /* ── Game Pages ── */
 /* ── HUD ── */
 .hud {
@@ -512,16 +450,16 @@ nav {
 
 /* ── GAME CANVAS AREA ── */
 #game-wrap {
-  position: relative;
-  z-index: 1;
   flex: 1;
   display: flex;
   overflow: hidden;
+  position: relative;
 }
 
 #game-canvas {
+  flex: 1;
+  min-width: 0;
   display: block;
-  outline: none;
 }
 
 /* ── INVENTORY ── */
@@ -530,10 +468,12 @@ nav {
   background: rgba(0, 0, 10, 0.9);
   border-left: 2px solid rgba(0, 200, 200, 0.3);
   padding: 12px 8px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
+  flex-shrink: 0;
+  min-width: 100px;
 }
 
 .inv-title {
@@ -571,6 +511,122 @@ nav {
   font-size: 5px;
   color: #aaccdd;
   text-align: center;
+}
+
+#item-popup {
+  display: none;
+  position: absolute;
+  z-index: 60;
+  background: rgba(3, 12, 25, 0.98);
+  border: 2px solid #00ffcc;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 230px;
+  max-width: 260px;
+  box-shadow: 0 0 30px rgba(0, 255, 200, 0.25);
+  backdrop-filter: blur(6px);
+}
+
+.item-popup-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: none;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 10px;
+  padding: 2px 4px;
+}
+
+.item-popup-close:hover { color: #ff8888; }
+
+#item-popup-icon {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+#item-popup-name {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 8px;
+  color: #00ffcc;
+  text-align: center;
+  margin-bottom: 6px;
+  text-shadow: 0 0 10px #00ffcc;
+  line-height: 1.6;
+}
+
+#item-popup-rarity {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: #f5e000;
+  text-align: center;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+
+.item-popup-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 200, 200, 0.2);
+  margin-bottom: 12px;
+}
+
+#item-popup-desc {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: #8899aa;
+  line-height: 2;
+  margin-bottom: 14px;
+}
+
+.item-popup-use-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  color: #446655;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+#item-popup-use {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 6px;
+  color: #ffcc00;
+  background: rgba(255, 200, 0, 0.06);
+  border: 1px solid rgba(255, 200, 0, 0.2);
+  border-radius: 4px;
+  padding: 8px;
+  line-height: 2;
+  margin-bottom: 12px;
+}
+
+.item-popup-one-use {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  color: #334455;
+  text-align: center;
+}
+
+.inv-slot.has-item {
+  border-color: rgba(0, 255, 200, 0.5);
+  cursor: pointer;
+}
+
+.inv-slot.has-item:hover {
+  border-color: #00ffcc;
+  box-shadow: 0 0 10px rgba(0, 255, 200, 0.3);
+}
+
+.inv-footer {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 5px;
+  color: #223333;
+  text-align: center;
+  margin-top: auto;
+  padding: 6px 2px;
+  line-height: 1.8;
 }
 
 /* ── PUZZLE MODAL ── */
@@ -750,6 +806,68 @@ nav {
   border: 1px solid #ff4444;
 }
 
+/* ── ABOUT ── */
+.about-section {
+  margin-bottom: 32px;
+}
+
+.about-section h2 {
+  font-size: 11px;
+  color: #ff00cc;
+  margin-bottom: 16px;
+}
+
+.chapter {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 0, 204, 0.15);
+  border-radius: 8px;
+  padding: 18px;
+  margin-bottom: 12px;
+}
+
+.chapter-icon {
+  font-size: 24px;
+}
+
+.chapter h3 {
+  font-size: 8px;
+  color: #ff00cc;
+  margin-bottom: 8px;
+}
+
+.chapter p {
+  font-size: 7px;
+  color: #8899aa;
+  line-height: 2;
+}
+
+.ship-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+
+.ship-stat {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(0, 200, 200, 0.15);
+  border-radius: 6px;
+  padding: 14px;
+}
+
+.ship-stat .label {
+  font-size: 6px;
+  color: #8899aa;
+  margin-bottom: 6px;
+}
+
+.ship-stat .value {
+  font-size: 9px;
+  color: #00ffff;
+}
+
 /* ── FOOTER ── */
 footer {
   position: relative;
@@ -759,4 +877,133 @@ footer {
   font-size: 6px;
   color: #334455;
   border-top: 1px solid rgba(0, 200, 200, 0.1);
+}
+
+/* ── CONTROLS HINT ── */
+#controls-hint {
+  position: relative;
+  z-index: 1;
+  background: rgba(0, 10, 20, 0.9);
+  border-top: 2px solid rgba(0, 200, 200, 0.3);
+  padding: 6px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+#controls-hint span {
+  font-size: 7px;
+  color: #446655;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes twinkle {
+
+  0%,
+  100% {
+    opacity: 0.2
+  }
+
+  50% {
+    opacity: 1
+  }
+}
+
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0)
+  }
+
+  50% {
+    transform: translateY(-8px)
+  }
+}
+
+@keyframes glow-pulse {
+
+  0%,
+  100% {
+    text-shadow: 0 0 8px #00ffff, 0 0 20px #ff00cc
+  }
+
+  50% {
+    text-shadow: 0 0 20px #00ffff, 0 0 40px #ff00cc
+  }
+}
+
+@keyframes play-glow {
+
+  0%,
+  100% {
+    box-shadow: 0 0 20px #ffee00, 0 0 40px rgba(255, 220, 0, 0.5)
+  }
+
+  50% {
+    box-shadow: 0 0 30px #ffee00, 0 0 60px rgba(255, 200, 0, 0.8)
+  }
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1
+  }
+
+  50% {
+    opacity: 0.3
+  }
+}
+
+@keyframes shake {
+
+  0%,
+  100% {
+    transform: translate(0, 0)
+  }
+
+  20% {
+    transform: translate(-4px, 2px)
+  }
+
+  40% {
+    transform: translate(4px, -2px)
+  }
+
+  60% {
+    transform: translate(-2px, 2px)
+  }
+
+  80% {
+    transform: translate(2px, -1px)
+  }
+}
+
+@keyframes scan-line {
+  0% {
+    top: 0
+  }
+
+  100% {
+    top: 100%
+  }
+}
+
+@media (max-width: 600px) {
+  .hud {
+    font-size: 7px;
+  }
+
+  #inventory {
+    width: 72px;
+  }
+
+  .inv-slot {
+    width: 54px;
+    height: 54px;
+    font-size: 20px;
+  }
 }
