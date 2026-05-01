@@ -457,7 +457,7 @@ const ITEM_INFO = {
     name: 'STABILIZER KEY',
     rarity: '★★☆ UNCOMMON',
     desc: 'Emergency reactor key. Physically locks plasma flow to safe operating levels.',
-    use: 'Reactor Stabilize Puzzle\nLocks all reactor values into the safe zone instantly.'
+    use: 'Reactor Stabilize Puzzle\nLocks all reactor values into the safe zone instantly. The last number for the = 4 9'
   }
 };
 
@@ -652,7 +652,7 @@ function codeDecryptPuzzle() {
   function render() {
     box.innerHTML = `
       <p class="puzzle-title">🔐 CODE DECRYPT</p>
-      <p class="puzzle-desc">Match the alien sequence from the wall: ◈ ⊕ ◊ ⊞</p>
+      <p class="puzzle-desc">Match the alien sequence from the wall</p>
       ${hasTablet ? `<div style="font-family:'Press Start 2P',monospace;font-size:7px;color:#f5e000;background:rgba(245,224,0,0.08);border:1px solid #f5e000;border-radius:4px;padding:8px;margin-bottom:10px">📟 TABLET HINT: ${SECRET.map(i => SYMBOLS[i]).join(' ')}</div>` : ''}
       <div style="display:flex;gap:10px;justify-content:center;margin-bottom:16px">
         ${Array(4).fill(0).map((_, i) => `<div style="width:48px;height:48px;background:rgba(0,200,200,0.1);border:2px solid ${i < input.length ? '#f5e000' : 'rgba(0,200,200,0.3)'};border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:22px;color:#f5e000">${i < input.length ? SYMBOLS[input[i]] : '?'}</div>`).join('')}
@@ -733,11 +733,25 @@ function escapePodPuzzle() {
       <p class="puzzle-title">🚀 ESCAPE POD</p>
       <p class="puzzle-desc">Insert keycards collected from earlier rooms, then enter the launch code.</p>
       <div style="display:flex;gap:10px;margin-bottom:14px">
-        <div style="flex:1;padding:10px;border-radius:6px;font-family:'Press Start 2P',monospace;font-size:7px;border:1px solid ${card1 ? '#00ff88' : '#ff4444'};color:${card1 ? '#00ff88' : '#ff4444'};background:${card1 ? 'rgba(0,255,100,0.08)' : 'rgba(255,68,0,0.05)'};text-align:center">${card1 ? '✓' : '✗'} CARD A<br><span style="font-size:5px;color:#8899aa;margin-top:4px;display:block">Override Chip</span></div>
-        <div style="flex:1;padding:10px;border-radius:6px;font-family:'Press Start 2P',monospace;font-size:7px;border:1px solid ${card2 ? '#00ff88' : '#ff4444'};color:${card2 ? '#00ff88' : '#ff4444'};background:${card2 ? 'rgba(0,255,100,0.08)' : 'rgba(255,68,0,0.05)'};text-align:center">${card2 ? '✓' : '✗'} CARD B<br><span style="font-size:5px;color:#8899aa;margin-top:4px;display:block">Data Tablet</span></div>
+        <div style="flex:1;padding:10px;border-radius:6px;font-family:'Press Start 2P',monospace;font-size:7px;
+          border:1px solid ${card1 ? '#00ff88' : '#888'};
+          color:${card1 ? '#00ff88' : '#aaa'};
+          background:${card1 ? 'rgba(0,255,100,0.08)' : 'rgba(255,255,255,0.03)'};
+          text-align:center">
+          ${card1 ? '✓ READY' : 'OPTIONAL'}
+          <br><span style="font-size:5px;color:#8899aa;margin-top:4px;display:block">Override Chip</span>
+        </div>
+        <div style="flex:1;padding:10px;border-radius:6px;font-family:'Press Start 2P',monospace;font-size:7px;
+          border:1px solid ${card2 ? '#00ff88' : '#888'};
+          color:${card2 ? '#00ff88' : '#aaa'};
+          background:${card2 ? 'rgba(0,255,100,0.08)' : 'rgba(255,255,255,0.03)'};
+          text-align:center">
+          ${card2 ? '✓ READY' : 'OPTIONAL'}
+        <br><span style="font-size:5px;color:#8899aa;margin-top:4px;display:block">Data Tablet</span>
       </div>
+</div>
       <div style="font-family:'Press Start 2P',monospace;font-size:7px;color:#ffcc88;background:rgba(255,200,0,0.06);border:1px solid rgba(255,200,0,0.25);border-radius:4px;padding:10px;margin-bottom:14px;line-height:1.8">
-        💡 HINT: Launch code found in Research Lab.<br>Reactor temp threshold = 4 digits.
+        💡 HINT: Launch code found in Research Lab.<br>Reactor temp threshold = 7 7 _ _.
       </div>
       <div style="display:flex;gap:8px;justify-content:center;margin-bottom:14px">
         ${Array(4).fill(0).map((_, i) => `<div style="width:44px;height:44px;background:rgba(0,200,200,0.1);border:2px solid ${i < codeInput.length ? '#00ffcc' : 'rgba(0,200,200,0.3)'};border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:'Press Start 2P',monospace;font-size:16px;color:#00ffcc">${codeInput[i] !== undefined ? '●' : '○'}</div>`).join('')}
@@ -750,13 +764,36 @@ function escapePodPuzzle() {
   window.epKey = function (k) {
     if (k === '⌫') { codeInput = codeInput.slice(0, -1); render(); return; }
     if (k === '' || codeInput.length >= 4) return;
-    codeInput += k; render();
+
+    codeInput += k;
+    render();
+
     if (codeInput.length === 4) {
       setTimeout(() => {
         const msg = document.getElementById('ep-msg');
-        if (!card1 || !card2) { if (msg) msg.textContent = '✗ BOTH KEYCARDS REQUIRED'; onWrong(); codeInput = ''; render(); return; }
-        if (codeInput === LAUNCH_CODE) onSolved();
-        else { if (msg) msg.textContent = '✗ INVALID CODE — -10s PENALTY'; onWrong(); codeInput = ''; render(); }
+
+        if (codeInput === LAUNCH_CODE) {
+          // ✅ Bonus based on items (optional system)
+          let bonus = 0;
+          if (card1) bonus += 300;
+          if (card2) bonus += 300;
+
+          G.score += bonus;
+
+          if (msg) {
+            msg.textContent = bonus > 0
+              ? `✓ LAUNCH SUCCESS — BONUS +${bonus}`
+              : '✓ LAUNCH SUCCESS — NO BONUS';
+            msg.style.color = '#00ff88';
+          }
+
+          setTimeout(() => onSolved(), 500);
+        } else {
+          if (msg) msg.textContent = '✗ INVALID CODE — -10s PENALTY';
+          onWrong();
+          codeInput = '';
+          render();
+        }
       }, 300);
     }
   };
