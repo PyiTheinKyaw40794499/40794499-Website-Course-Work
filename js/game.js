@@ -457,7 +457,7 @@ const ITEM_INFO = {
     name: 'STABILIZER KEY',
     rarity: '★★☆ UNCOMMON',
     desc: 'Emergency reactor key. Physically locks plasma flow to safe operating levels.',
-    use: 'Reactor Stabilize Puzzle\nLocks all reactor values into the safe zone instantly. The last number for the = 4 9'
+    use: 'Reactor Stabilize Puzzle\nLocks all reactor values into the safe zone instantly. The last number for the code = 4 9'
   }
 };
 
